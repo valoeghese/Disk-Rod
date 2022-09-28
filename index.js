@@ -24,6 +24,7 @@ const scopes = ['rpc', 'rpc.api'];
 
 let channel = "#missingno";
 let server = "No Server";
+let needsUpdate = false;
 
 function or(value, or) {
 	return value ? value : or;
@@ -38,6 +39,7 @@ internets.get('/update', function (req, reply) {
 	try {
 		server = or(req.query.server, "No Server");
 		channel = or(req.query.channel, "#missingno");
+		needsUpdate = true;
 		reply.send({ success: true });
 	}
 	catch (e) {
@@ -78,14 +80,26 @@ async function setActivity() {
 	});
 }
 
+async function waitForActivity() {
+	while (!needsUpdate) {
+		// no-op
+	}
+
+	console.log(`Found update. Updating to ${channel} in ${server}`);
+
+	// is running an update. immediately set this back to false to prep for next
+	needsUpdate = false;
+
+	// set activity
+	setActivity();
+
+	// activity can only be set every 15 seconds. Wait 15 seconds.
+	setTimeout(waitForActivity, 15 * 1000);
+}
+
 rpc.on('ready', async () => {
 	console.log("I am an async function.");
-	setActivity();
-	
-	// activity can only be set every 15 seconds
-	setInterval(() => {
-		setActivity();
-	}, 15 * 1000);
+	waitForActivity();
 });
 
 console.log("Logging in RPC");

@@ -1,3 +1,6 @@
+let lastServer = undefined;
+let lastChannel = undefined;
+
 setInterval(
 	() =>{
 		let server = document.querySelector(".name-3Uvkvr");
@@ -11,7 +14,11 @@ setInterval(
 			server = "Direct Messages";
 		}
 
-		fetch(`http://127.0.0.1:6969/update?server=${server}&channel=${channel}`).catch(console.error);
+		if (lastServer != server || lastChannel != channel) {
+			lastServer = server;
+			lastChannel = channel;
+			fetch(`http://127.0.0.1:6969/update?server=${server}&channel=${channel}`).catch(console.error);
+		}
 	},
-	1000 * 5
+	1000 * 2
 );
