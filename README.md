@@ -15,4 +15,4 @@ Is this allowed?
 
 What if i put it in discord's js files to run on startup?
 - that's probably less likely to be allowed
-- then again, some ppl use betterdiscord and discord doesnt do shit about it, and that's arguably a worse offender than this.
+- then again, some ppl use betterdiscord and discord doesnt do much about it, and that's arguably a worse offender than this.
