@@ -5,6 +5,15 @@
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWAR
  */
 
+const parameters = {
+  method: 'GET' ,
+  mode : 'no-cors',
+  headers: {
+      'Content-Type': 'application/json',
+      'Origin': ''
+  }
+};
+
 setInterval(
 	() =>{
 		let server = document.querySelector(".name-3Uvkvr");
@@ -18,7 +27,7 @@ setInterval(
 			server = "Direct Messages";
 		}
 
-		fetch(`http://127.0.0.1:6969/update?server=${server}&channel=${channel}`).catch(console.error);
+		fetch(`http://127.0.0.1:6969/update?server=${server}&channel=${channel}`, parameters).catch(console.error);
 	},
 	1000 * 1
 );
