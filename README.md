@@ -2,7 +2,7 @@
 
 Discord Rich presence for discord
 
-All Rights Reserved.
+Made available under the MIT license.
 
 How 2 use:
 - set up local node server
