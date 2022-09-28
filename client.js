@@ -14,6 +14,9 @@ const parameters = {
   }
 };
 
+let lastServer = undefined;
+let lastChannel = undefined;
+
 setInterval(
 	() =>{
 		let server = document.querySelector(".name-3Uvkvr");
@@ -27,7 +30,12 @@ setInterval(
 			server = "Direct Messages";
 		}
 
-		fetch(`http://127.0.0.1:6969/update?server=${server}&channel=${channel}`, parameters).catch(console.error);
+		// probably unnecessary, but this limits network use to only send an update if the server or channel has changed.
+		if (server != lastServer || channel != lastChannel) {
+			lastServer = server;
+			lastChannel = channel;
+			fetch(`http://127.0.0.1:6969/update?server=${server}&channel=${channel}`, parameters).catch(console.error);
+		}
 	},
 	1000 * 1
 );
