@@ -71,8 +71,7 @@ async function setActivity() {
 		return;
 	}
 	
-	// You'll need to have snek_large and snek_small assets uploaded to
-	// https://discord.com/developers/applications/<application_id>/rich-presence/assets
+	// update activity
 	rpc.setActivity({
 		details: `Viewing ${channel}`,
 		state: `In ${server}`,
